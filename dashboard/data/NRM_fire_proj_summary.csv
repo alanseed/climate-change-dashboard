@@ -1,4 +1,4 @@
-﻿Site Name,Lat,Lon,Model,Experiment,Year,Avg Ann CFFDI,"DPY(12-25) ""High"" ","DPY(25-50) ""Very High""","DPY(50-75) "" Severe""","DPY(75-100) ""Extreme""","DPY(>100) ""Catastrophic"""
+﻿Site Name,Lat,Lon,Model,Experiment,Year,Avg Ann CFFDI,DPY(12-25) High ,DPY(25-50) Very High,DPY(50-75)  Severe,DPY(75-100) Extreme,DPY(>100) Catastrophic
 Adelaide,-34.92,138.62,CESM1-CAM5,rcp45,2030,3089.55,56.47,21.97,2.27,0.1,0
 Adelaide,-34.92,138.62,CESM1-CAM5,rcp45,2050,3224.59,60.1,23.5,2.4,0.1,0
 Adelaide,-34.92,138.62,CESM1-CAM5,rcp45,2070,3276.64,60,24.4,2.57,0.1,0
