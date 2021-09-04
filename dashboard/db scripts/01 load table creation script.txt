@@ -1,12 +1,15 @@
 -- =======================================================================
 -- Drop tables
+-- If running again and want to drop the tables, uncomment block
 
+/*
 DROP TABLE public.humidity_09hours_raw;
 DROP TABLE public.humidity_15hours_raw;
 DROP TABLE public.maximum_temperatures_raw;
 DROP TABLE public.mean_temperatures_raw;
 DROP TABLE public.minimum_temperatures_raw;
 DROP TABLE public.nrm_fire_projection_summary_raw;
+*/
 
 -- =======================================================================
 -- =======================================================================
@@ -44,7 +47,7 @@ CREATE TABLE public.humidity_09hours_raw
     "October" numeric,
     "November" numeric,
     "December" numeric
-)
+);
 
 
 -- -----------------------------------------------------------------------
@@ -79,7 +82,7 @@ CREATE TABLE public.humidity_15hours_raw
     "October" numeric,
     "November" numeric,
     "December" numeric
-)
+);
 
 
 -- -----------------------------------------------------------------------
@@ -114,7 +117,7 @@ CREATE TABLE public.maximum_temperatures_raw
     "October" numeric,
     "November" numeric,
     "December" numeric
-)
+);
 
 -- -----------------------------------------------------------------------
 -- Mean Temperatures raw table
@@ -148,7 +151,7 @@ CREATE TABLE public.mean_temperatures_raw
     "October" numeric,
     "November" numeric,
     "December" numeric
-)
+);
 
 -- -----------------------------------------------------------------------
 -- Minimum Temperatures raw table
@@ -182,7 +185,7 @@ CREATE TABLE public.minimum_temperatures_raw
     "October" numeric,
     "November" numeric,
     "December" numeric
-)
+);
 
 -- -----------------------------------------------------------------------
 -- Fire Projection Summary raw table
@@ -201,9 +204,13 @@ CREATE TABLE public.nrm_fire_projection_summary_raw
     "DPY(50-75) Severe" numeric,
     "DPY(75-100) Extreme" numeric,
     "DPY(over100) Catastrophic" numeric
-)
+);
 
 -- -----------------------------------------------------------------------
+-- Load data mannully on to each tables
+
+-- -----------------------------------------------------------------------
+-- The number of records in each table, use the below lines to get a count 
 --SELECT count(*) FROM public.maximum_temperatures_raw; 	-- 11200
 --SELECT count(*) FROM public.mean_temperatures_raw;		-- 11648
 --SELECT count(*) FROM public.minimum_temperatures_raw;		-- 11200	
