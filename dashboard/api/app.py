@@ -50,7 +50,7 @@ def list(table):
 
   # function to make the SQL needed to get humidity data for a station 
 def get_hum(station_name):
-  sql = 'SELECT st.station_name_short, st.lat, st.lon,'\
+  sql = 'SELECT st.station_id, st.station_name_short, st.lat, st.lon,'\
       'rc.rcp_id, md.model_id,'\
       'cy.climatology_year_range, hum.annual,'\
       'hum.january, hum.february, hum.march, hum.april, hum.may, hum.june,'\
@@ -71,24 +71,25 @@ def get_hum(station_name):
   for rec in results:
     rec = { 
       "variable": "humidity at 9AM",
-      "station_name": rec[0],
-      "coord": {"lat":float(rec[1]), "lon":float(rec[2]) },
-      "rcp_id":rec[3], 
-      "model_id":rec[4],
-      "climatology_year_range":rec[5],
-      "annual":float(rec[6]),
-      "january":float(rec[7]), 
-      "february":float(rec[8]), 
-      "march":float(rec[9]), 
-      "april":float(rec[10]), 
-      "may":float(rec[11]),     
-      "june":float(rec[12]),
-      "july":float(rec[13]), 
-      "august":float(rec[14]), 
-      "september":float(rec[15]), 
-      "october":float(rec[16]), 
-      "november":float(rec[17]), 
-      "december":float(rec[18])
+      "station_id": rec[0],
+      "station_name": rec[1],
+      "coord": {"lat":float(rec[2]), "lon":float(rec[3]) },
+      "rcp_id":rec[4], 
+      "model_id":rec[5],
+      "climatology_year_range":rec[6],
+      "annual":float(rec[7]),
+      "january":float(rec[8]), 
+      "february":float(rec[9]), 
+      "march":float(rec[10]), 
+      "april":float(rec[11]), 
+      "may":float(rec[12]),     
+      "june":float(rec[13]),
+      "july":float(rec[14]), 
+      "august":float(rec[15]), 
+      "september":float(rec[16]), 
+      "october":float(rec[17]), 
+      "november":float(rec[18]), 
+      "december":float(rec[19])
     }
     data.append(rec)
   return data
