@@ -3,10 +3,51 @@ body {
   margin: 0;
 }
 
-#map,
-body,
-html {
+#map {
+
+  border: 1px solid black;
+  border-radius: 8px;
   height: 100%;
+  width: 100%;
 }
 
+.header{
+  width: 80%
+  margin: 0 auto;
+}
+
+header {
+  background: #55d6aa;  
+}
+
+.logo {
+  float: left;
+}
+
+#svg {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar span {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+nav ul {
+  margin 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 60px;
+}
+
+.container{width:1000px;
+  height:1000px;
+  background: rgb(245, 245, 248);
+  margin: 0px auto;}
 
