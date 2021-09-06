@@ -28,7 +28,7 @@ def list(table):
       "station_name_long":station[1], 
       "station_name_short":station[2], 
       "coord":{"lat":float(station[3]), "lon":float(station[4])} }
-      output.append(json.dumps(rec))
+      output.append(rec)
     
   if table == "models":
     output.clear()
@@ -36,7 +36,7 @@ def list(table):
     for model in results:
       rec = {"model_id":model[0], 
       "model_description":model[1]}
-      output.append(json.dumps(rec))
+      output.append(rec)
 
   if table == "rcp":
       output.clear()
@@ -44,7 +44,7 @@ def list(table):
       for rcp in results:
         rec = {"rcp_id":rcp[0], 
         "rcp_description":rcp[1]}
-        output.append(json.dumps(rec))
+        output.append(rec)
 
   return {"results":output}
 
@@ -90,7 +90,7 @@ def get_hum(station_name):
       "november":float(rec[17]), 
       "december":float(rec[18])
     }
-    data.append(json.dumps(rec))
+    data.append(rec)
   return data
 
 @app.route("/humidity <name>")
