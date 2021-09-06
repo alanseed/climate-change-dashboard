@@ -12,7 +12,9 @@ conn = engine.connect()
 app = Flask(__name__)
 @app.route("/")
 def hello_world():
-  return "<p>Usage: /list table</p> <p>Where table = stations, models, rcp</p>" 
+  response = "<p>Usage:</p><p> /list \"table\" Where table = stations, models, rcp</p> \n"\
+    "<p> /humidity \"station_name\"</p>" 
+  return response
 
 # return the stations with their names and locations 
 @app.route("/list <table>")
@@ -44,4 +46,54 @@ def list(table):
         "rcp_description":rcp[1]}
         output.append(json.dumps(rec))
 
+  return {"results":output}
+
+  # function to make the SQL needed to get humidity data for a station 
+def get_hum(station_name):
+  sql = 'SELECT st.station_name_short, st.lat, st.lon,'\
+      'rc.rcp_id, md.model_id,'\
+      'cy.climatology_year_range, hum.annual,'\
+      'hum.january, hum.february, hum.march, hum.april, hum.may, hum.june,'\
+      'hum.july, hum.august, hum.september, hum.october, hum.november, hum.december '\
+  'FROM public.cl_humidity_09hours AS hum '\
+  'JOIN public.cl_stations As st '\
+  'ON hum.station_id = st.station_id '\
+  'JOIN public.cl_models As md '\
+  'ON hum.model_id = md.model_id '\
+  'JOIN public.cl_rcp As rc '\
+  'ON hum.rcp_id = rc.rcp_id '\
+  'JOIN public.cl_climatology_years As cy '\
+  'ON hum.climatology_year = cy.climatology_year '\
+  'WHERE st.station_name_short = \'' + station_name + '\'' 
+
+  data = [ ]
+  results = conn.execute(sql)
+  for rec in results:
+    rec = { 
+      "variable": "humidity at 9AM",
+      "station_name": rec[0],
+      "coord": {"lat":float(rec[1]), "lon":float(rec[2]) },
+      "rcp_id":rec[3], 
+      "model_id":rec[4],
+      "climatology_year_range":rec[5],
+      "annual":float(rec[6]),
+      "january":float(rec[7]), 
+      "february":float(rec[8]), 
+      "march":float(rec[9]), 
+      "april":float(rec[10]), 
+      "may":float(rec[11]),     
+      "june":float(rec[12]),
+      "july":float(rec[13]), 
+      "august":float(rec[14]), 
+      "september":float(rec[15]), 
+      "october":float(rec[16]), 
+      "november":float(rec[17]), 
+      "december":float(rec[18])
+    }
+    data.append(json.dumps(rec))
+  return data
+
+@app.route("/humidity <name>")
+def humidity(name):
+  output = get_hum(name)
   return {"results":output}
