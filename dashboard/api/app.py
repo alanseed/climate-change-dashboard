@@ -13,7 +13,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
   response = "<p>Usage:</p><p> /list \"table\" Where table = stations, models, rcp</p> \n"\
-    "<p> /humidity \"station_name\"</p>" 
+    "<p> /humidity \"station_id\"</p>" 
   return response
 
 # return the stations with their names and locations 
@@ -49,7 +49,7 @@ def list(table):
   return {"results":output}
 
   # function to make the SQL needed to get humidity data for a station 
-def get_hum(station_name):
+def get_hum(station_id):
   sql = 'SELECT st.station_id, st.station_name_short, st.lat, st.lon,'\
       'rc.rcp_id, md.model_id,'\
       'cy.climatology_year_range, hum.annual,'\
@@ -64,7 +64,7 @@ def get_hum(station_name):
   'ON hum.rcp_id = rc.rcp_id '\
   'JOIN public.cl_climatology_years As cy '\
   'ON hum.climatology_year = cy.climatology_year '\
-  'WHERE st.station_name_short = \'' + station_name + '\'' 
+  'WHERE st.station_id = ' + station_id  
 
   data = [ ]
   results = conn.execute(sql)
