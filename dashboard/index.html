@@ -1,48 +1,104 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">  
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Load font awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="static/css/style.css">
-<title>Australian Weather Prediction</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- custom css -->
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+  <title>Australian Climate Change Predication</title>
+</head>
+
 <body>
+  <div class="container-fluid px-0">
+    <header class="m-0">
+      <nav class="navbar navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand text-success " Href="#">Australian Climate Change Predication</a>
+          <button
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            class="navbar-toggler"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item active"></li>
+                <a href="#" class="nav-link">About</a>             
+  
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"data-bs-toggle="dropdown" aria-expanded="false">Temp Profile</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a href="#" class="dropdown-item">Minimum</a></li>
+                    <li><a href="#" class="dropdown-item">Maximum</a></li>
+                    <li><a href="#" class="dropdown-item">Mean</a></li>
+                    <li><a href="#" class="dropdown-item">Fire Danger Rating</a></li>
+                  </ul>
+              </li>
+  
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle"
+                  id="navbarDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >  
+                  Year Profile
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">       
+                  <li><a href="#" class="dropdown-item">2030</a></li>
+                  <li><a href="#" class="dropdown-item">2050</a></li>
+                  <li><a href="#" class="dropdown-item">2070</a></li>
+                  <li><a href="#" class="dropdown-item">2090</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+            <form class="d-flex">
+              <input type="text" class="form-control me-2"placeholder="City">
+              <button type="submit" class="btn btn-success" >Search</button>
+            </form>
+          </div>      
+      </nav>
 
-<!-- The navigation menu -->
-<div class="navbar">
-  <h1>Australian Weather Predications</h1>
-  <a href="#home">Home</a>
-  <div class="subnav">
-    <button class="subnavbtn">About <i class="fa fa-caret-down"></i></button>
-    <div class="subnav-content">
-      <a href="#company">Overview</a>
-      <a href="#team">Team</a>      
-    </div>
-  </div>
-  <div class="subnav">
-    <button class="subnavbtn">Temp class <i class="fa fa-caret-down"></i></button>
-    <div class="subnav-content">
-      <a href="#">Minimum</a>
-      <a href="#">Maximum</a>
-      <a href="#">Mean</a>
-      <a href="#">Fire Danger</a>
-    </div>
-  </div>
-  <div class="subnav">
-    <button class="subnavbtn">Year Period <i class="fa fa-caret-down"></i></button>
-    <div class="subnav-content">
-      <a href="#">2030</a>
-      <a href="#">2050</a>
-      <a href="#">2070</a>
-      <a href="#">2090</a>
-    </div>
-  </div>
-  <input type="text" placeholder="Search City...">
-</div>
 
-</body>
+    </header>
+
+    <div class="row">
+      <div class="col-md-12 rounded-0">
+          <div id="map" class="rounded-0">
+              <img src="https://via.placeholder.com/1800x700?text=Loading+Map+..." class="img-fluid">
+          </div>
+      </div>
+    </div>  
+
+  </div>
+  
+
+
+
+    <!--Bootstrap Bundle with Popper-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    
+     <!-- D3 and d3-tip JavaScript -->
+     <script src="https://d3js.org/d3.v5.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <script type="text/javascript" src="../static/js/config.js"></script>
+    <script type="text/javascript" src="../static/js/logic.js"></script>
+    <script type="text/javascript" src="../static/js/logic-map.js"></script>
+  </body>
 </html>
-
-
-
-
