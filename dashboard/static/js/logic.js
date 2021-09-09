@@ -12,8 +12,6 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?acce
 	accessToken: API_KEY
 }).addTo(myMap);
 
-
-
 // Grab data with d3
 d3.json("data/aus_lga.geojson").then(function(data) {
     // Create a GeoJSON layer containing the features array
