@@ -162,16 +162,16 @@ function createMarkers(response) {
             fillColor = colors.level1;
         }
         */
-        var station = L.circleMarker([latitude, longitude], {
-            radius: 1 ** 2,
+        var marker = L.circleMarker([latitude, longitude], {
+            //radius: 1 ** 2,
             color: "black",
             fillColor: "red",
             fillOpacity: 1,
             weight: 1
         })
-        station.bindPopup("<h4> Location: " + name_short + "</h4><br>");
+        marker.bindPopup("<h4> Location: " + name_short + "</h4><br>");
         //console.log("name_short");
-        markers.push(station);
+        markers.push(marker);
     }    
     
     // Create a layer group made from the bike markers array, pass it into the createMap function

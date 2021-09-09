@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine
-from api_keys import pg_key
-from flask import Flask, request, render_template
+from api_keys import pg_key, API_KEY
+from flask import Flask, request, render_template, redirect, url_for
 from flask_cors import cross_origin
+
 
 url = f"postgresql://postgres:{pg_key}@localhost:5432/Climate_DB"
 engine = create_engine(url)
@@ -11,9 +12,10 @@ conn = engine.connect()
 app = Flask(__name__)
 
 # generate the usage page
-@app.route("/")
+@app.route("/index")
+@cross_origin()
 def usage():
-    return render_template("climatedb.html")
+    return render_template("index.html", mapbox_access_token=API_KEY)
 
 # get the stations with their names and locations
 @app.route("/list", methods=['GET'])
