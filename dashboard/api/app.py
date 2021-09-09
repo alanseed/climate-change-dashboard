@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from api_keys import pg_key
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,jsonify 
+from flask_cors import CORS, cross_origin
 
 url = f"postgresql://postgres:{pg_key}@localhost:5432/Climate_DB"
 engine = create_engine(url)
@@ -8,7 +9,7 @@ conn = engine.connect()
 
 # set up the routes
 app = Flask(__name__)
-
+CORS(app)
 # generate the usage page
 @app.route("/")
 def usage():
@@ -16,6 +17,7 @@ def usage():
 
 # get the stations with their names and locations
 @app.route("/list", methods=['GET'])
+@cross_origin()
 def list():
 	if request.method == 'GET':
 		table = request.args.get("table")
@@ -46,8 +48,8 @@ def list():
 				rec = {"rcp_id": rcp[0],
 								"rcp_description": rcp[1]}
 				output.append(rec)
-
-	return {"results": output}
+	response = jsonify(output)
+	return response
 
 # function to make the SQL needed to get humidity data for a station
 def get_hum(station_id, rcp_id):
@@ -100,6 +102,7 @@ def get_hum(station_id, rcp_id):
 
 # get the humidity data for a station_id
 @app.route("/humidity", methods=['GET'])
+@cross_origin()
 def humidity():
 	station_id = request.args.get("station_id")
 	rcp_id = request.args.get("rcp_id")
@@ -156,6 +159,7 @@ def get_temp(station_id, rcp_id):
 
 # get the temp data for a station_id
 @app.route("/temp", methods=['GET'])
+@cross_origin()
 def temp():
 	station_id = request.args.get("station_id")
 	rcp_id = request.args.get("rcp_id")
@@ -204,6 +208,7 @@ def get_fdi(station_id, rcp_id):
 
 # get the fdi data for a station_id
 @app.route("/fdi", methods=['GET'])
+@cross_origin()
 def fdi():
     station_id = request.args.get("station_id")
     rcp_id = request.args.get("rcp_id")
