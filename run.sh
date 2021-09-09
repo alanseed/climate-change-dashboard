@@ -1,0 +1,1 @@
+FLASK_APP=dashboard/api/app.py flask run
