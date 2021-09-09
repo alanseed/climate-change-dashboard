@@ -19,7 +19,12 @@ d3.json("http://localhost:5000/list?table=stations").then(function (data) {
       fillColor:"#f03", 
       fillOpacity:50.0,
       radius: 10000.0
-    });
-    marker.addTo(map)
+    })
+    .bindTooltip(function (layer){ 
+      console.log( station.station_id) 
+      return station.station_name_short 
+      })
+    .addTo(mymap)
   }
 });
+
