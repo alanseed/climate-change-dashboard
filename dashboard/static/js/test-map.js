@@ -35,7 +35,8 @@ d3.json("http://localhost:5000/list?table=stations").then(function (data) {
       options = {
         id: station.station_id,
         lat: station.coord.lat,
-        lon: station.coord.lon
+        lon: station.coord.lon,
+        name: station.station_name_short
       };
     marker.on("click", make_figs, options)
   }
@@ -146,7 +147,7 @@ function make_fdi_fig(station) {
       } ;
       var data = [rcp45,rcp85];
       var layout = {
-        title:'Number of high fire danger days per year',
+        title: station.name + ' Number of high fire danger days per year',
         barmode:'group'};
       Plotly.newPlot('tester',data,layout) ;
     }
