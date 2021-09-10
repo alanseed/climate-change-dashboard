@@ -147,9 +147,28 @@ function make_fdi_fig(station) {
       } ;
       var data = [rcp45,rcp85];
       var layout = {
-        title: station.name + ' Number of high fire danger days per year',
+        autosize:true,
+        title: station.name,
+        width:300,
+        height:300,
+        margin:{
+          l:25,
+          r:5,
+          b:50,
+          t:25,
+          pad:4
+        },
         barmode:'group'};
-      Plotly.newPlot('tester',data,layout) ;
+
+      // set up the popup to view the graph    
+      var div = '<div id="' + station.name + '" style="width: 300px; height:300px;"></div>';
+
+      popup
+        .setLatLng([station.lat, station.lon])
+        .setContent(div)
+        .openOn(mymap);
+
+      Plotly.newPlot(station.name,data,layout) ;
     }
   });
 }
