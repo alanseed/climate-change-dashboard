@@ -6,7 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <!-- Charts.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
 
   <!-- custom css -->
   <link rel="stylesheet" type="text/css" href="../static/css/style.css">
@@ -38,7 +41,7 @@
   
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" 
-                  id="navbarDropdown"
+                  id="tempDropdown"
                   data-bs-toggle="dropdown" 
                   aria-expanded="false">Temp Profile</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -51,7 +54,7 @@
 
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" 
-                  id="navbarDropdown"
+                  id="rcpDropdown"
                   data-bs-toggle="dropdown" 
                   aria-expanded="false">RCP</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -64,7 +67,7 @@
               
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle"
-                  id="navbarDropdown"
+                  id="yearDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false">Year Profile
                 </a>
@@ -94,7 +97,25 @@
               <img src="https://via.placeholder.com/1800x700?text=Loading+Map+..." class="img-fluid">
           </div>
       </div>
-    </div>  
+    </div> 
+    
+    <div class="container">
+      <canvas id="horizonalChart"></canvas>
+    </div>
+    <script>
+      var horizonalChart = document.getElementById('horizonalChart').getContext('2d');
+
+      let tempChart = new Chart(horizonalChart, {
+        type: 'horizontalBar'
+        data:{},
+          labels:[],
+          datasets:[]
+      },
+      options:{}
+    }),
+
+    </script>    
+
 
   </div>
   
