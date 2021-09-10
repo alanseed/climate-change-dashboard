@@ -57,7 +57,7 @@ function make_fdi_fig(station) {
       rcps.push(data[i].rcp_id)
     }
   });
-  var years = ["1995-2014","2030-2049", "2050-2069", "2070-2089", "2090-2109"];
+  var years = ["2030-2049", "2050-2069", "2070-2089", "2090-2109"];
 
   class dpy {
     high = [];
@@ -96,7 +96,7 @@ function make_fdi_fig(station) {
         .setContent("No Fire danger index data found")
         .openOn(mymap);
     } else {
-      // found data so make the figure 
+      // put the data into the data model 
       for (let i = 0; i < data.results.length; i++) {
         let rcp = data.results[i].rcp_id;
         let years = data.results[i].climatology_year_range;
@@ -106,6 +106,49 @@ function make_fdi_fig(station) {
         fdi[rcp][years].extreme.push(data.results[i].dpy_extreme);
         fdi[rcp][years].catastrophic.push(data.results[i].dpy_catastrophic);
       }
+
+      // load up the mean dpy high arrays for the bars
+      var y45 = [];
+      for ( let iy = 0; iy < years.length; iy++){
+        let arr = fdi["RCP45"][years[iy]]["high"] ;
+        let sum = 0;
+        for ( let i = 0; i < arr.length; i++){
+          sum += parseFloat(arr[i]); 
+        }
+        var avg = sum / arr.length;
+        y45.push(avg);
+      }
+
+      var y85 = [];
+      for ( let iy = 0; iy < years.length; iy++){
+        let arr = fdi["RCP85"][years[iy]]["high"] ;
+        let sum = 0;
+        for ( let i = 0; i < arr.length; i++){
+          sum += parseFloat(arr[i]); 
+        }
+        var avg = sum / arr.length;
+        y85.push(avg);
+      }
+
+
+      // make the bar chart with error bars 
+      var rcp45 = {
+        x:years,
+        y:y45 ,
+        name:'RCP45',
+        type:'bar'
+      } ;
+      var rcp85 = {
+        x:years,
+        y:y85 ,
+        name:'RCP85',
+        type:'bar'
+      } ;
+      var data = [rcp45,rcp85];
+      var layout = {
+        title:'Number of high fire danger days per year',
+        barmode:'group'};
+      Plotly.newPlot('tester',data,layout) ;
     }
   });
 }
