@@ -1,36 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Leaflet Step-1</title>
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
-
-  <!-- Our CSS -->
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
-</head>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Load font awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="static/css/style.css">
+<title>Australian Weather Prediction</title>
 <body>
 
-  <!-- The div that holds our map -->
-  <div id="map"></div>
+<!-- The navigation menu -->
+<div class="navbar">
+  <h1>Australian Weather Predications</h1>
+  <a href="#home">Home</a>
+  <div class="subnav">
+    <button class="subnavbtn">About <i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="#company">Overview</a>
+      <a href="#team">Team</a>      
+    </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Temp class <i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="#">Minimum</a>
+      <a href="#">Maximum</a>
+      <a href="#">Mean</a>
+      <a href="#">Fire Danger</a>
+    </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Year Period <i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="#">2030</a>
+      <a href="#">2050</a>
+      <a href="#">2070</a>
+      <a href="#">2090</a>
+    </div>
+  </div>
+  <input type="text" placeholder="Search City...">
+</div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-  <!-- D3 JavaScript -->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <!-- API key -->
-  <script type="text/javascript" src="static/js/config.js"></script>
-  <!-- Our JavaScript -->
-  <script type="text/javascript" src="static/js/logic.js"></script>
 </body>
-
 </html>
+
+
+
+

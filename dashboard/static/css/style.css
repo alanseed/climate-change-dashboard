@@ -1,53 +1,96 @@
-body {
-  padding: 0;
+/* Add a black background color to the top navigation */
+/* The navigation menu */
+h1 {
+  color: yellowgreen;
+  text-align: center;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Navigation links */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The subnavigation menu */
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+/* Subnav button */
+.subnav .subnavbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
   margin: 0;
 }
 
-#map {
+/* Add a red background color to navigation links on hover */
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: yellowgreen;
+}
 
-  border: 1px solid black;
-  border-radius: 8px;
-  height: 100%;
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: yellowgreen;
   width: 100%;
+  z-index: 1;
 }
 
-.header{
-  width: 80%
-  margin: 0 auto;
-}
-
-header {
-  background: #55d6aa;  
-}
-
-.logo {
+/* Style the subnav links */
+.subnav-content a {
   float: left;
+  color: white;
+  text-decoration: none;
 }
 
-#svg {
-  width: 32px;
-  height: 32px;
+/* Add a grey background color on hover */
+.subnav-content a:hover {
+  background-color: rgb(250, 249, 249);
+  color: black;
 }
 
-.navbar span {
-  font-family: 'Roboto Slab', serif;
-  font-weight: 600;
-  font-size: 24px;
+/* When you move the mouse over the subnav container, open the subnav content */
+.subnav:hover .subnav-content {
+  display: block;
 }
 
-nav ul {
-  margin 0;
-  padding: 0;
-  list-style: none;
+.navbar input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
 }
 
-nav li {
-  display: inline-block;
-  margin-left: 60px;
+/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+@media screen and (max-width: 600px) {
+  .navbar a, .subnav input[type=text] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;
+  }
 }
-
-.container{width:1000px;
-  height:1000px;
-  background: rgb(245, 245, 248);
-  margin: 0px auto;}
-
