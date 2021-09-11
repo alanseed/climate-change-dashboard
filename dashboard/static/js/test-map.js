@@ -2,12 +2,12 @@
 var mymap = L.map('mapid').setView([-28, 133.5], 4)
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-  maxZoom: 18,
-  id: 'mapbox/streets-v11',
-  tileSize: 512,
-  zoomOffset: -1,
-  accessToken: API_KEY
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
 
 // popup for "no data" message 
@@ -107,6 +107,7 @@ function make_fdi_fig(station) {
         fdi[rcp][years].extreme.push(data.results[i].dpy_extreme);
         fdi[rcp][years].catastrophic.push(data.results[i].dpy_catastrophic);
       }
+      console.log(data);
 
       // load up the mean dpy high arrays for the bars
       var y45 = [];
@@ -161,7 +162,7 @@ function make_fdi_fig(station) {
         barmode:'group'};
 
       // set up the popup to view the graph    
-      var div = '<div id="' + station.name + '" style="width: 300px; height:300px;"></div>';
+      var div = '<div id="' + station.name + '" style="width: 100px; height:100px;"></div>';
 
       popup
         .setLatLng([station.lat, station.lon])

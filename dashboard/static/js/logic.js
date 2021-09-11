@@ -1,37 +1,19 @@
-// Create map object
-var myMap = L.map("map", {
-	center: [-27, 132],
-	zoom: 5
-});
+function init(){
+    //select the dropdown area for bar chart
+    var cityInput = d3.select("#cityInput")
+    console.log(cityInput);
 
-// Adding tile layer
-L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-	attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    maxZoom: 10,
-    id: "light-v10",
-	accessToken: API_KEY
-}).addTo(myMap);
+    var stationNames = []; 
+    //read the json file
+    d3.json("http://localhost:5000/list?table=stations").then((data) => {  
+        //render through the data set
+        for (let i = 0; i < data.length; i++) {
+            let station = data[i];
 
-<<<<<<< HEAD
-=======
-
->>>>>>> litesh
-// Grab data with d3
-d3.json("data/aus_lga.geojson").then(function(data) {
-    // Create a GeoJSON layer containing the features array
-    // Each feature a popup describing the place and magnitude
-    L.geoJson(data,{
-        pointToLayer: function (feature, latlng) {
-            // Create a circle marker
-            return L.circleMarker(latlng, {
-                color: "white",
-                weight: 1.5,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
-        },
-        onEachFeature: function(feature, layer){
-            layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><span>Name: ${feature.properties.mag}</span>`)
         }
-    }).addTo(myMap);
-});
+        console.log(station)
+       
+    })
+
+}
+init();

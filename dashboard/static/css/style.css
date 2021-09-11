@@ -1,12 +1,23 @@
-<<<<<<< HEAD
-#mapid {height:500px; width:500px;}
-=======
+#mapid {height:500px; width:500px;} */
 
-#map {
+
+/* #mapid {
   position: relative;
   border: 1px solid black;
   border-radius: 8px;
   height: 100%;
   width: 100%;
 }
->>>>>>> litesh
+ */
+/* .d3-tip {
+  position: absolute;
+  padding: 6px;
+  font-size: 12px;
+  line-height: 1;
+  line-height: 1.5em;
+  color: #fff;
+  text-align: center;
+  text-transform: capitalize;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+} */
