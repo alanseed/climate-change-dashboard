@@ -1,19 +1,3 @@
--- =======================================================================
--- Drop tables
--- If running again and want to drop the tables, uncomment block
-
--- DROP TABLE public.cl_stations;
--- DROP TABLE public.cl_models;
--- DROP TABLE public.cl_rcp;
--- DROP TABLE public.cl_climatology_years;
-
-
--- =======================================================================
--- =======================================================================
--- Create tables
-
--- -----------------------------------------------------------------------
--- Stations table
 
 CREATE TABLE public.cl_stations
 (

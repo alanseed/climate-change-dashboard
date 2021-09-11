@@ -10,4 +10,6 @@ conn = engine.connect()
 
 sql_1 = open("db_script.sql")
 sql_1_string = sql_1.read() 
+print(sql_1_string)
 conn.execute(sql_1_string)
+sql_1.close()

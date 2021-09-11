@@ -1,29 +1,22 @@
--- =======================================================================
--- =======================================================================
--- populate reference tables
 
--- =======================================================================
--- -----------------------------------------------------------------------
--- Stations table
--- Delete data before inserting
-TRUNCATE public.cl_stations;
+TRUNCATE cl_stations;
 
 -- Insert data
-INSERT INTO public.cl_stations(
+INSERT INTO cl_stations(
 	station_id, station_name_long, lat, lon)
 
 SELECT DISTINCT "STN_ID", "STATION_NAME", "LAT", "LON"
-FROM public.maximum_temperatures_raw
+FROM maximum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT "STN_ID", "STATION_NAME", "LAT", "LON"
-FROM public.mean_temperatures_raw
+FROM mean_temperatures_raw
 
 UNION
 
 SELECT DISTINCT "STN_ID", "STATION_NAME", "LAT", "LON"
-FROM public.minimum_temperatures_raw;
+FROM minimum_temperatures_raw;
 
 -- -----------------------------------------------------------------------
 -- Update Station with town names
@@ -44,7 +37,7 @@ AND		cl_stations.lon	= src.lon;
 -- -----------------------------------------------------------------------
 -- Update the missing station names
 
-UPDATE 	public.cl_stations
+UPDATE 	cl_stations
 
 SET		station_name_short = initcap(REPLACE(REPLACE(REPLACE(station_name_long, 'AERO', ''),'AWS',''),'AIRPORT',''))
 
@@ -53,7 +46,7 @@ WHERE	station_name_short is null;
 -- -----------------------------------------------------------------------
 -- Remove - from station long names
 
-UPDATE 	public.cl_stations
+UPDATE 	cl_stations
 
 SET		station_name_short = REPLACE(station_name_short, '-', ' ');
 
@@ -62,82 +55,82 @@ SET		station_name_short = REPLACE(station_name_short, '-', ' ');
 -- -----------------------------------------------------------------------
 -- Model table
 -- Delete data before inserting
-TRUNCATE public.cl_models;
+TRUNCATE cl_models;
 
 -- Insert data
-INSERT INTO public.cl_models(
+INSERT INTO cl_models(
 	model_id)
 
 SELECT DISTINCT UPPER("MODEL")
-FROM public.maximum_temperatures_raw
+FROM maximum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT UPPER("MODEL")
-FROM public.mean_temperatures_raw
+FROM mean_temperatures_raw
 
 UNION
 
 SELECT DISTINCT UPPER("MODEL")
-FROM public.minimum_temperatures_raw
+FROM minimum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT UPPER("Model")
-FROM public.nrm_fire_projection_summary_raw;
+FROM nrm_fire_projection_summary_raw;
 
 -- =======================================================================
 -- -----------------------------------------------------------------------
 -- Representative Concentration Pathway (RCP) table
 -- Delete data before inserting
-TRUNCATE public.cl_rcp;
+TRUNCATE cl_rcp;
 
 -- Insert data
-INSERT INTO public.cl_rcp(
+INSERT INTO cl_rcp(
 	rcp_id)
 
 SELECT DISTINCT UPPER("RCP")
-FROM public.maximum_temperatures_raw
+FROM maximum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT UPPER("RCP")
-FROM public.mean_temperatures_raw
+FROM mean_temperatures_raw
 
 UNION
 
 SELECT DISTINCT UPPER("RCP")
-FROM public.minimum_temperatures_raw
+FROM minimum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT UPPER("Experiment")
-FROM public.nrm_fire_projection_summary_raw;
+FROM nrm_fire_projection_summary_raw;
 
 -- =======================================================================
 -- -----------------------------------------------------------------------
 -- Climatology years table
 -- Delete data before inserting
-TRUNCATE public.cl_climatology_years;
+TRUNCATE cl_climatology_years;
 
 -- Insert data
-INSERT INTO public.cl_climatology_years(
+INSERT INTO cl_climatology_years(
 	climatology_year, climatology_year_range)
 
 SELECT DISTINCT SUBSTRING("CLIMATOLOGY",1,4)::integer, UPPER("CLIMATOLOGY")
-FROM public.maximum_temperatures_raw
+FROM maximum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT SUBSTRING("CLIMATOLOGY",1,4)::integer, UPPER("CLIMATOLOGY")
-FROM public.mean_temperatures_raw
+FROM mean_temperatures_raw
 
 UNION
 
 SELECT DISTINCT SUBSTRING("CLIMATOLOGY",1,4)::integer, UPPER("CLIMATOLOGY")
-FROM public.minimum_temperatures_raw
+FROM minimum_temperatures_raw
 
 UNION
 
 SELECT DISTINCT ("Year"), CAST("Year" as text) || '-' ||  CAST("Year"+19 as text)
-FROM public.nrm_fire_projection_summary_raw;
+FROM nrm_fire_projection_summary_raw;
