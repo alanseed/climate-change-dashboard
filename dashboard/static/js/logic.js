@@ -278,10 +278,12 @@ function make_temp_fig(station) {
             type: 'line'
         }
         var layout = {
-            autosize: true,
+            autosize: false,
+            paper_bgcolor: "rgb(127, 199, 244)",
+            plot_bgcolor: "rgb(127, 199, 244)",
             title: station.name + ': ' + rcp,
-            width: 500,
-            height: 300,
+            width: 650,
+            height: 639,
             margin: {
                 l: 50,
                 r: 50,
