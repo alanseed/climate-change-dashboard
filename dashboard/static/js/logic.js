@@ -253,8 +253,9 @@ function make_temp_fig(station) {
                 }
             }
             else {
+                console.log(data.results[i][month]);
                 for (let imonth = 0; imonth < 12; imonth++) {
-                    historical[imonth] = data.results[i][months[imonth]];
+                    historical[imonth] = parseFloat(data.results[i][month]);
                 }
 
             }
@@ -276,7 +277,7 @@ function make_temp_fig(station) {
 
         // We are now ready to make the figure for a selected rcp 
         var e = document.getElementById("scenarioSelect"); 
-        var rcp = e.value
+        var rcp = e.value 
         var year_1 = {
             x: months,
             y: temps[rcp][years[0]],
