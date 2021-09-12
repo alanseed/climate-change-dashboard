@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #mapid {height:500px; width:500px;} */
 
 
 /* #mapid {
 =======
+=======
+>>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
 body::before {
     display: block; 
     content: "";
@@ -12,6 +15,9 @@ body::before {
 
 
 #mapID {
+<<<<<<< HEAD
+>>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
+=======
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
   position: relative;
   border: 1px solid black;
@@ -19,6 +25,7 @@ body::before {
   height: 500px;
   width: 500px; 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
  */
 /* .d3-tip {
@@ -33,6 +40,9 @@ body::before {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 4px;
 } */
+=======
+
+>>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
 =======
 
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
