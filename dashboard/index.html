@@ -34,11 +34,15 @@
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand text-success font-weight-bold" href='index.html'>Australian Climate Change Predication</a>                      
-        <button class="btn btn-success navbar-btn" id="rcp26">RCP 26</button>
-        <button class="btn btn-success navbar-btn" id="rcp45">RCP 45</button>
-        <button class="btn btn-success navbar-btn" id="rcp60">RCP 60</button>
-        <button class="btn btn-success navbar-btn" id="rcp85">RCP 85</button>
+        <a class="navbar-brand text-success font-weight-bold" href='index.html'>Australian Climate Change Predication</a> 
+
+        <select id="scenarioSelect" class="form-select bg-light form-select-sm" aria-lablel=".form-select-sm rcp"> 
+          <option selected>Scenarios</option>
+          <option value="RCP26">Low</option>
+          <option value="RCP45">Medium 1</option>
+          <option value="RCP60">Medium 2</option>
+          <option value="RCP85">High</option>
+        </select>        
         <a href='info.html' class="btn btn-primary navbar-btn">About</a>
       </div>
     </div>
