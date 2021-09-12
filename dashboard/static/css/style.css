@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #mapid {height:500px; width:500px;} */
 
 
@@ -7,6 +8,8 @@
 =======
 =======
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
+=======
+>>>>>>> dev
 body::before {
     display: block; 
     content: "";
@@ -16,15 +19,19 @@ body::before {
 
 #mapID {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
 =======
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
+=======
+>>>>>>> dev
   position: relative;
   border: 1px solid black;
   border-radius: 8px;
   height: 500px;
   width: 500px; 
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
  */
@@ -46,3 +53,6 @@ body::before {
 =======
 
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
+=======
+
+>>>>>>> dev

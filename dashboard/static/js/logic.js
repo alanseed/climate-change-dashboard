@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 function init(){
     //select the dropdown area for bar chart
     var cityInput = d3.select("#cityInput")
@@ -20,12 +21,15 @@ function init(){
 }
 init();
 =======
+=======
+>>>>>>> dev
 // get the list of models rcps, years 
 var models = [];
 d3.json("http://localhost:5000/list?table=models").then(function (data) {
     for (let i = 0; i < data.length; i++) {
         models.push(data[i].model_id)
     }
+<<<<<<< HEAD
 });
 var rcps = [];
 d3.json("http://localhost:5000/list?table=rcp").then(function (data) {
@@ -177,6 +181,74 @@ function make_fdi_fig(station) {
         catastrophic = [];
     };
 
+=======
+});
+var rcps = [];
+d3.json("http://localhost:5000/list?table=rcp").then(function (data) {
+    for (let i = 0; i < data.length; i++) {
+        rcps.push(data[i].rcp_id)
+    }
+});
+var years = ["2020-2039", "2040-2059", "2060-2079", "2080-2099"];
+var fdi_years = ["2030-2049", "2050-2069", "2070-2089", "2090-2109"];
+
+// Create the tile layer that will be the background of our map
+var mymap = L.map('mapid').setView([-28, 133.5], 4)
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: API_KEY
+}).addTo(mymap);
+
+// popup for "no data" message 
+var popup = L.popup();
+
+// factory to make the figures 
+function make_figs() {
+    make_fdi_fig(this)
+    make_temp_fig(this)
+}
+
+// Perform an API call to the station information 
+d3.json("http://localhost:5000/list?table=stations").then(function (data) {
+    for (let i = 0; i < data.length; i++) {
+        let station = data[i];
+        let marker = L.circle([station.coord.lat, station.coord.lon], {
+            color: "red",
+            fillColor: "#f03",
+            fillOpacity: 50.0,
+            radius: 10000.0
+        })
+            .addTo(mymap)
+            .bindTooltip(function () {
+                return station.station_name_short
+            }),
+            options = {
+                id: station.station_id,
+                lat: station.coord.lat,
+                lon: station.coord.lon,
+                name: station.station_name_short
+            };
+        marker.on("click", make_figs, options)
+    }
+});
+
+// make the fire danger figure 
+function make_fdi_fig(station) {
+
+    class dpy {
+        high = [];
+        very_high = [];
+        severe = [];
+        extreme = [];
+        catastrophic = [];
+    };
+
+>>>>>>> dev
     var fdi = {
         "HISTORICAL": {
             "1995-2014": new dpy()
@@ -189,7 +261,10 @@ function make_fdi_fig(station) {
             "2090-2109": new dpy()
         },
 
+<<<<<<< HEAD
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
+=======
+>>>>>>> dev
         "RCP85": {
             "2030-2049": new dpy(),
             "2050-2069": new dpy(),
@@ -403,6 +478,9 @@ function make_temp_fig(station) {
     });
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
 =======
 >>>>>>> c0109439dbc9a2332709c51b3f6642a8d4f81569
+=======
+>>>>>>> dev
