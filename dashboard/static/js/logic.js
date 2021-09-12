@@ -13,6 +13,7 @@ d3.json("http://localhost:5000/list?table=rcp").then(function (data) {
 });
 var years = ["2020-2039", "2040-2059", "2060-2079", "2080-2099"];
 var fdi_years = ["2030-2049", "2050-2069", "2070-2089", "2090-2109"];
+var activeStation 
 
 // Create the tile layer that will be the background of our map
 var mymap = L.map('mapid').setView([-28, 133.5], 4)
@@ -57,6 +58,15 @@ d3.json("http://localhost:5000/list?table=stations").then(function (data) {
             };
         marker.on("click", make_figs, options)
     }
+
+    activeStation ={
+        id: data[0].station_id,
+        lat:data[0].coord.lat,
+        lon:data[0].coord.lon,
+        name:data[0].station_name_short
+    }
+    make_temp_fig(activeStation)
+    make_fdi_fig(activeStation)
 });
 
 // make the fire danger figure 
@@ -151,11 +161,25 @@ function make_fdi_fig(station) {
             var data = [rcp45, rcp85];
             var layout = {
                 autosize: true,
-                title: station.name,
+                title: {
+                    text:station.name,
+                    font:{size:14}
+                },
+                xaxis:{
+                    tickfont:{size:10}
+                },
+                yaxis:{
+                    title: {
+                        text:'High fire danger days per year',
+                        font:{size:10}
+                    },
+                    tickfont:{size:10}                        
+                },
+                legend:{font:{size:10}},
                 width: 300,
                 height: 300,
                 margin: {
-                    l: 25,
+                    l: 50,
                     r: 5,
                     b: 50,
                     t: 25,
@@ -251,8 +275,8 @@ function make_temp_fig(station) {
         }
 
         // We are now ready to make the figure for a selected rcp 
-        // TO DO pick rcp up from the drop down on the nav bar 
-        var rcp = rcps[0];
+        var e = document.getElementById("scenarioSelect"); 
+        var rcp = e.value
         var year_1 = {
             x: months,
             y: temps[rcp][years[0]],
@@ -296,3 +320,9 @@ function make_temp_fig(station) {
        Plotly.newPlot("tempid", data, layout);
     });
 }
+
+// event listener for the scenario selector 
+var scenarioSelector = document.getElementById("scenarioSelect"); 
+scenarioSelector.addEventListener("change",function() {
+    make_temp_fig(activeStation)
+})
