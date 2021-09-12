@@ -1,7 +1,7 @@
 body::before {
     display: block; 
     content: "";
-    height: 56px;
+    height: 0px;
 }
 
 
