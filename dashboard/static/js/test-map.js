@@ -1,6 +1,9 @@
 // Create the tile layer that will be the background of our map
 var mymap = L.map('mapid').setView([-28, 133.5], 4)
 
+//mymap.on('click', (e) => {
+ // });
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 18,
@@ -17,6 +20,7 @@ var popup = L.popup();
 function make_figs() {
   make_fdi_fig(this)
 }
+
 
 // Perform an API call to the station information 
 d3.json("http://localhost:5000/list?table=stations").then(function (data) {
@@ -40,7 +44,97 @@ d3.json("http://localhost:5000/list?table=stations").then(function (data) {
       };
     marker.on("click", make_figs, options)
   }
+
+  avg_temp_bar()
 });
+
+
+function avg_temp_bar(station){
+  // Perform an API call to the Avg Temp information 
+  url = 'http://localhost:5000/avg_temp?station_id=';
+  if(station)
+    url+= station.id;     
+  else
+    url+= '32040'; 
+
+  d3.json(url).then(function (data) {
+    
+    var x_RCP26 = []
+    var y_RCP26 = []
+    var x_RCP45 = []
+    var y_RCP45 = []
+    var x_RCP60 = []
+    var y_RCP60 = []
+    var x_RCP85 = []
+    var y_RCP85 = []
+    var station_name 
+    for (let i = 0; i < data.results.length; i++) {
+      
+      var year_range
+      if(data.results[i].climatology_year==2020)
+        year_range = '2020-39'
+      if(data.results[i].climatology_year==2040)   
+        year_range = '2040-59'
+      if(data.results[i].climatology_year==2060)   
+        year_range = '2060-79'
+      if(data.results[i].climatology_year==2080)   
+        year_range = '2080-99'
+
+      if(data.results[i].rcp_id=='RCP26')
+        x_RCP26.push(year_range)  
+        y_RCP26.push(data.results[i].avg_temp)
+         
+      if(data.results[i].rcp_id=='RCP45')
+        x_RCP45.push(year_range)  
+        y_RCP45.push(data.results[i].avg_temp)
+
+      if(data.results[i].rcp_id=='RCP60')
+        x_RCP60.push(year_range)  
+        y_RCP60.push(data.results[i].avg_temp)
+
+      if(data.results[i].rcp_id=='RCP85')
+        x_RCP85.push(year_range)  
+        y_RCP85.push(data.results[i].avg_temp)
+        
+      station_name = data.results[i].station  
+    }  
+ 
+    var trace_RCP26 = {
+      x: x_RCP26,
+      y: y_RCP26,
+      name: 'RCP26',
+      type: 'bar'
+    }
+
+    var trace_RCP45 = {
+      x: x_RCP45,
+      y: y_RCP45,
+      name: 'RCP45',
+      type: 'bar'
+    }
+    var trace_RCP60 = {
+      x: x_RCP60,
+      y: y_RCP60,
+      name: 'RCP60',
+      type: 'bar'
+    }
+    var trace_RCP85 = {
+      x: x_RCP85,
+      y: y_RCP85,
+      name: 'RCP85',
+      type: 'bar'
+    }
+    
+    var bar_data = [trace_RCP26,trace_RCP45,trace_RCP60,trace_RCP85];
+    
+    var layout = {title:station_name,
+                  barmode: 'group',
+                  yaxis: {'title': 'avg temp', 'range':[28,31]}};
+    
+    Plotly.newPlot('myBar', bar_data, layout);
+
+  });
+}
 
 // make the fire danger figure 
 function make_fdi_fig(station) {
@@ -172,3 +266,4 @@ function make_fdi_fig(station) {
     }
   });
 }
+
