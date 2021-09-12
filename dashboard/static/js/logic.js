@@ -176,20 +176,20 @@ function make_fdi_fig(station) {
                     tickfont:{size:10}                        
                 },
                 legend:{font:{size:10}},
-                width: 300,
-                height: 300,
+                width: 250,
+                height: 200,
                 margin: {
-                    l: 50,
+                    l: 40,
                     r: 5,
-                    b: 50,
+                    b: 40,
                     t: 25,
-                    pad: 4
+                    pad: 1
                 },
                 barmode: 'group'
             };
 
             // set up the popup to view the graph    
-            var div = '<div id="' + station.name + '" style="width: 300px; height:300px;"></div>';
+            var div = '<div id="' + station.name + '" style="width: 250px; height:200px;"></div>';
 
             popup
                 .setLatLng([station.lat, station.lon])
@@ -302,12 +302,28 @@ function make_temp_fig(station) {
             type: 'line'
         }
         var layout = {
+            title: {
+                text:station.name + ': ' + rcp,
+                font:{size:14}
+            },
+            xaxis:{
+                tickfont:{size:10}
+            },
+            yaxis:{
+                title: {
+                    text:'Mean temperature \xB0C',
+                    font:{size:10}
+                },
+                tickfont:{size:10}                        
+            },
+            legend:{font:{size:10}},
+
+
             autosize: false,
             paper_bgcolor: "rgb(127, 199, 244)",
             plot_bgcolor: "rgb(127, 199, 244)",
-            title: station.name + ': ' + rcp,
-            width: 650,
-            height: 639,
+            width: 600,
+            height: 300,
             margin: {
                 l: 50,
                 r: 50,
