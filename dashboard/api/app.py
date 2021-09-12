@@ -215,6 +215,45 @@ def fdi():
     output = get_fdi(station_id, rcp_id)
     return {"results": output}
 
+# function to make the SQL needed to get avg temp data for a station
+def get_avg_temp(station_id):
+	sql = 'select 	 a.station_id,a.climatology_year, avg(a.annual) avg_temp,' \
+			'b.station_name_short station ,b.lat ,b.lon ,a.rcp_id ' \
+			'from public.cl_mean_temperatures AS a '\
+			'join public.cl_stations AS b '\
+			'on a.station_id = b.station_id '\
+			'where a.model_id = \'MIROC5\' '
+
+	if station_id=='0':
+		sql+= ''
+	else:
+		sql+= f" and a.station_id = {station_id}"
+
+	sql+= ' group by a.station_id,a.climatology_year'\
+			',b.station_name_short, b.lat, b.lon,a.rcp_id'\
+
+	data = []
+	results = conn.execute(sql)
+	for res in results:
+		row = {
+				"variable": "avg temperature(MIROC5)",
+				"station_id": res[0],
+				"climatology_year": res[1],
+				"avg_temp": float(res[2]),
+				"station":res[3],
+				"coord": {"lat": float(res[4]), "lon": float(res[5])},
+				"rcp_id": res[6]
+			}
+		data.append(row)
+	return data
+
+@app.route("/avg_temp", methods=['GET'])
+@cross_origin()
+def avg_temp():
+	station_id = request.args.get("station_id")
+	output = get_avg_temp(station_id)
+	return {"results": output}
+
 
 if __name__ == '__main__':
     # run app in debug mode on port 5000
