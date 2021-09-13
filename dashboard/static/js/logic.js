@@ -16,7 +16,7 @@ var fdi_years = ["2030-2049", "2050-2069", "2070-2089", "2090-2109"];
 var activeStation
 
 // Create the tile layer that will be the background of our map
-var mymap = L.map('mapid').setView([-28, 133.5], 4)
+var mymap = L.map('mapid').setView([-28, 133.5], 5)
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -324,16 +324,14 @@ function make_temp_fig(station) {
             legend: { font: { size: 10 } },
 
             autosize: false,
-            paper_bgcolor: "rgb(127, 199, 244)",
-            plot_bgcolor: "rgb(127, 199, 244)",
-            width: 600,
-            height: 300,
+            width: 560,
+            height: 270,
             margin: {
                 l: 50,
                 r: 50,
                 b: 75,
                 t: 50,
-                pad: 4
+                pad: 1
             }
         };
         var data = [year_1, year_2, year_3, year_4];
@@ -449,14 +447,14 @@ function avg_temp_bar(station) {
             },
             legend: { font: { size: 10 } },
             barmode: 'group',
-            width: 600,
-            height: 300,
+            width: 560,
+            height: 270,
             margin: {
                 l: 60,
                 r: 50,
                 b: 50,
                 t: 50,
-                pad: 4
+                pad: 1
             }
         };
         Plotly.newPlot('myBar', bar_data, layout);
