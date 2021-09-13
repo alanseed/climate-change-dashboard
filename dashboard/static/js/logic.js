@@ -13,7 +13,7 @@ d3.json("http://localhost:5000/list?table=rcp").then(function (data) {
 });
 var years = ["2020-2039", "2040-2059", "2060-2079", "2080-2099"];
 var fdi_years = ["2030-2049", "2050-2069", "2070-2089", "2090-2109"];
-var activeStation 
+var activeStation
 
 // Create the tile layer that will be the background of our map
 var mymap = L.map('mapid').setView([-28, 133.5], 4)
@@ -32,8 +32,9 @@ var popup = L.popup();
 
 // factory to make the figures 
 function make_figs() {
-    make_fdi_fig(this)
-    make_temp_fig(this)
+    make_fdi_fig(this);
+    make_temp_fig(this);
+    avg_temp_bar(this);
 }
 
 // Perform an API call to the station information 
@@ -59,14 +60,15 @@ d3.json("http://localhost:5000/list?table=stations").then(function (data) {
         marker.on("click", make_figs, options)
     }
 
-    activeStation ={
+    activeStation = {
         id: data[0].station_id,
-        lat:data[0].coord.lat,
-        lon:data[0].coord.lon,
-        name:data[0].station_name_short
+        lat: data[0].coord.lat,
+        lon: data[0].coord.lon,
+        name: data[0].station_name_short
     }
-    make_temp_fig(activeStation)
-    make_fdi_fig(activeStation)
+    make_temp_fig(activeStation);
+    make_fdi_fig(activeStation);
+    avg_temp_bar(activeStation);
 });
 
 // make the fire danger figure 
@@ -162,20 +164,20 @@ function make_fdi_fig(station) {
             var layout = {
                 autosize: true,
                 title: {
-                    text:station.name,
-                    font:{size:14}
+                    text: station.name,
+                    font: { size: 14 }
                 },
-                xaxis:{
-                    tickfont:{size:10}
+                xaxis: {
+                    tickfont: { size: 10 }
                 },
-                yaxis:{
+                yaxis: {
                     title: {
-                        text:'High fire danger days per year',
-                        font:{size:10}
+                        text: 'High fire danger days per year',
+                        font: { size: 10 }
                     },
-                    tickfont:{size:10}                        
+                    tickfont: { size: 10 }
                 },
-                legend:{font:{size:10}},
+                legend: { font: { size: 10 } },
                 width: 250,
                 height: 200,
                 margin: {
@@ -275,9 +277,11 @@ function make_temp_fig(station) {
             }
         }
 
+        // TO DO - find out why there are no historical data from the api 
+
         // We are now ready to make the figure for a selected rcp 
-        var e = document.getElementById("scenarioSelect"); 
-        var rcp = e.value 
+        var e = document.getElementById("scenarioSelect");
+        var rcp = e.value
         var year_1 = {
             x: months,
             y: temps[rcp][years[0]],
@@ -304,21 +308,20 @@ function make_temp_fig(station) {
         }
         var layout = {
             title: {
-                text:station.name + ': ' + rcp,
-                font:{size:14}
+                text: station.name + ': ' + rcp,
+                font: { size: 14 }
             },
-            xaxis:{
-                tickfont:{size:10}
+            xaxis: {
+                tickfont: { size: 10 }
             },
-            yaxis:{
+            yaxis: {
                 title: {
-                    text:'Mean temperature \xB0C',
-                    font:{size:10}
+                    text: 'Mean monthly temp \xB0C',
+                    font: { size: 12 }
                 },
-                tickfont:{size:10}                        
+                tickfont: { size: 10 }
             },
-            legend:{font:{size:10}},
-
+            legend: { font: { size: 10 } },
 
             autosize: false,
             paper_bgcolor: "rgb(127, 199, 244)",
@@ -332,14 +335,136 @@ function make_temp_fig(station) {
                 t: 50,
                 pad: 4
             }
-       };
-       var data = [year_1, year_2, year_3, year_4 ] ; 
-       Plotly.newPlot("tempid", data, layout);
+        };
+        var data = [year_1, year_2, year_3, year_4];
+        Plotly.newPlot("tempid", data, layout);
+    });
+}
+
+function avg_temp_bar(station) {
+    // Perform an API call to the Avg Temp information 
+    url = 'http://localhost:5000/avg_temp?station_id=';
+    if (station)
+        url += station.id;
+    else
+        url += '32040';
+
+    d3.json(url).then(function (data) {
+        var x_RCP26 = [];
+        var y_RCP26 = [];
+        var x_RCP45 = [];
+        var y_RCP45 = [];
+        var x_RCP60 = [];
+        var y_RCP60 = [];
+        var x_RCP85 = [];
+        var y_RCP85 = [];
+        var station_name;
+        var max_temp = 0;
+        var min_temp = 1000;
+
+        for (let i = 0; i < data.results.length; i++) {
+            if (data.results[i].avg_temp > max_temp) {
+                max_temp = data.results[i].avg_temp;
+            }
+            if (data.results[i].avg_temp < min_temp) {
+                min_temp = data.results[i].avg_temp;
+            }
+
+            var year_range;
+            if (data.results[i].climatology_year == 2020)
+                year_range = '2020-39';
+            if (data.results[i].climatology_year == 2040)
+                year_range = '2040-59';
+            if (data.results[i].climatology_year == 2060)
+                year_range = '2060-79';
+            if (data.results[i].climatology_year == 2080)
+                year_range = '2080-99';
+
+            if (data.results[i].rcp_id == 'RCP26') {
+                x_RCP26.push(year_range);
+                y_RCP26.push(parseFloat(data.results[i].avg_temp));
+            }
+
+            if (data.results[i].rcp_id == 'RCP45') {
+                x_RCP45.push(year_range)
+                y_RCP45.push(parseFloat(data.results[i].avg_temp))
+            }
+
+            if (data.results[i].rcp_id == 'RCP60') {
+                x_RCP60.push(year_range)
+                y_RCP60.push(parseFloat(data.results[i].avg_temp))
+            }
+
+            if (data.results[i].rcp_id == 'RCP85') {
+                x_RCP85.push(year_range);
+                y_RCP85.push(parseFloat(data.results[i].avg_temp));
+            }
+
+            station_name = data.results[i].station;
+        }
+
+        var trace_RCP26 = {
+            x: x_RCP26,
+            y: y_RCP26,
+            name: 'RCP26',
+            type: 'bar'
+        };
+
+        var trace_RCP45 = {
+            x: x_RCP45,
+            y: y_RCP45,
+            name: 'RCP45',
+            type: 'bar'
+        };
+        var trace_RCP60 = {
+            x: x_RCP60,
+            y: y_RCP60,
+            name: 'RCP60',
+            type: 'bar'
+        };
+        var trace_RCP85 = {
+            x: x_RCP85,
+            y: y_RCP85,
+            name: 'RCP85',
+            type: 'bar'
+        };
+
+        var bar_data = [trace_RCP26, trace_RCP45, trace_RCP60, trace_RCP85];
+
+        var layout = {
+            title: {
+                text: station.name,
+                font: { size: 14 }
+            },
+            xaxis: {
+                font: { size: 10 }
+            },
+            yaxis: {
+                range: [min_temp, max_temp],
+                title: {
+                    text: 'Mean annual temp \xB0C',
+                    font: { size: 12 }
+                },
+                tickfont:{size:12}
+            },
+            legend: { font: { size: 10 } },
+            barmode: 'group',
+            width: 600,
+            height: 300,
+            margin: {
+                l: 60,
+                r: 50,
+                b: 50,
+                t: 50,
+                pad: 4
+            }
+        };
+        Plotly.newPlot('myBar', bar_data, layout);
     });
 }
 
 // event listener for the scenario selector 
-var scenarioSelector = document.getElementById("scenarioSelect"); 
-scenarioSelector.addEventListener("change",function() {
-    make_temp_fig(activeStation)
+var scenarioSelector = document.getElementById("scenarioSelect");
+scenarioSelector.addEventListener("change", function () {
+    make_temp_fig(activeStation);
 })
