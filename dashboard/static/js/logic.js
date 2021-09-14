@@ -32,6 +32,7 @@ var popup = L.popup();
 
 // factory to make the figures 
 function make_figs() {
+    activeStation = this;
     make_fdi_fig(this);
     make_temp_fig(this);
     avg_temp_bar(this);
@@ -105,12 +106,14 @@ function make_fdi_fig(station) {
     // get the station fdi data 
     url = 'http://localhost:5000/fdi?station_id=' + station.id;
     d3.json(url).then(function (data) {
-        if (data.results.length == 0) {
+        if (data.results.length == 0) { 
+            document.getElementById('fdiid').style.visibility = 'hidden';
             popup
                 .setLatLng([station.lat, station.lon])
                 .setContent("No Fire danger index data found")
                 .openOn(mymap);
         } else {
+            document.getElementById('fdiid').style.visibility = 'visible';
             // put the data into the data model 
             for (let i = 0; i < data.results.length; i++) {
                 let rcp = data.results[i].rcp_id;
@@ -164,7 +167,7 @@ function make_fdi_fig(station) {
             var layout = {
                 autosize: true,
                 title: {
-                    text: station.name,
+                    text: 'High fire danger days per year <br>' + station.name,
                     font: { size: 14 }
                 },
                 xaxis: {
@@ -178,27 +181,27 @@ function make_fdi_fig(station) {
                     tickfont: { size: 10 }
                 },
                 legend: { font: { size: 10 } },
-                width: 250,
-                height: 200,
-                margin: {
+                width: 560,
+                height: 280,
+                    margin: {
                     l: 40,
                     r: 5,
                     b: 40,
-                    t: 25,
+                    t: 30,
                     pad: 1
                 },
                 barmode: 'group'
             };
 
-            // set up the popup to view the graph    
-            var div = '<div id="' + station.name + '" style="width: 250px; height:200px;"></div>';
+            // // set up the popup to view the graph    
+            // var div = '<div id="' + station.name + '" style="width: 250px; height:200px;"></div>';
 
-            popup
-                .setLatLng([station.lat, station.lon])
-                .setContent(div)
-                .openOn(mymap);
+            // popup
+            //     .setLatLng([station.lat, station.lon])
+            //     .setContent(div)
+            //     .openOn(mymap);
 
-            Plotly.newPlot(station.name, data, layout);
+            Plotly.newPlot("fdiid", data, layout);
         }
     });
 }
@@ -308,7 +311,7 @@ function make_temp_fig(station) {
         }
         var layout = {
             title: {
-                text: station.name + ': ' + rcp,
+                text: 'Mean monthly temperature for ' + rcp +'<br>' + station.name,
                 font: { size: 14 }
             },
             xaxis: {
@@ -431,7 +434,7 @@ function avg_temp_bar(station) {
 
         var layout = {
             title: {
-                text: station.name,
+                text: "Mean annual temperature <br>" + station.name,
                 font: { size: 14 }
             },
             xaxis: {

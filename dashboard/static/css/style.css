@@ -29,4 +29,11 @@ body::before {
   height: 300px;
   padding:10px;
 }
-
+#fdiid {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 580px;
+  height: 300px;
+  padding:10px;
+}
