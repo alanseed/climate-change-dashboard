@@ -1,5 +1,4 @@
 from sqlalchemy import create_engine
-# from api_keys import pg_key
 from flask import (Flask, request, render_template,jsonify, redirect)
 from flask_cors import CORS, cross_origin
 
@@ -8,18 +7,19 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 
 # local connection
-# url = f"postgresql://postgres:{pg_key}@localhost:5432/Climate_DB"
-# engine = create_engine(url)
-# conn = engine.connect()
+from api_keys import pg_key
+url = f"postgresql://postgres:{pg_key}@localhost:5432/Climate_DB"
+engine = create_engine(url)
+conn = engine.connect()
 
 # set up the routes
 app = Flask(__name__)
 CORS(app)
 
 # DB set up for Heroku deployment
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-conn = SQLAlchemy(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') 
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# conn = SQLAlchemy(app)
 
 
 # generate the usage page
