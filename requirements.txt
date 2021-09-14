@@ -1,8 +1,3 @@
-# packages in environment at C:\Users\alans\anaconda3\envs\heroku:
-#
-# Name                    Version                   Build  Channel
-ca-certificates           2021.7.5             haa95532_1  
-certifi                   2021.5.30        py39haa95532_0  
 click                     8.0.1              pyhd3eb1b0_0  
 flask                     1.1.2              pyhd3eb1b0_0  
 flask-sqlalchemy          2.5.1              pyhd3eb1b0_0  
