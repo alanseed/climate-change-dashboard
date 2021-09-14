@@ -1,7 +1,7 @@
 # script to load the database into postgresql 
 import pandas as pd
 from sqlalchemy import create_engine
-from api_keys import pg_key
+from config import pg_key 
 
 # local connection
 url = f"postgresql://postgres:{pg_key}@localhost:5432/Test_DB" 

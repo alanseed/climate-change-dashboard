@@ -1,18 +1,24 @@
 # script to load the database into postgresql 
 import pandas as pd
 from sqlalchemy import create_engine
-from api_keys import pg_key
+from sqlalchemy_utils import database_exists, create_database
+from config import pg_key 
 
 # local connection
 url = f"postgresql://postgres:{pg_key}@localhost:5432/Test_DB" 
 engine = create_engine(url) 
-conn = engine.connect() 
 
-# uncomment if re-running the data load
-# dat = open("drop_all_tables.sql")
-# dat_string = dat.read() 
-# conn.execute(dat_string) 
-# dat.close()
+if database_exists(engine.url):
+  print(database_exists(engine.url))
+  conn = engine.connect() 
+  dat = open("drop_all_tables.sql")
+  dat_string = dat.read() 
+  conn.execute(dat_string) 
+  dat.close()
+    
+else:     
+  create_database(engine.url)
+  conn = engine.connect() 
 
 crt = open("create_raw_tables.sql")
 crt_string = crt.read() 
