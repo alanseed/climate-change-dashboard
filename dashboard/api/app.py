@@ -23,7 +23,8 @@ conn = SQLAlchemy(app)
 
 
 # generate the usage page
-@app.route("/")
+@app.route("/",methods=['GET'])
+@cross_origin()
 def usage():
     return render_template("climatedb.html")
 
