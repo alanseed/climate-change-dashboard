@@ -1,21 +1,3 @@
--- =======================================================================
--- Drop tables
--- If running again and want to drop the tables, uncomment block
-
--- DROP TABLE public.cl_humidity_09hours;
--- DROP TABLE public.cl_humidity_15hours;
--- DROP TABLE public.cl_maximum_temperatures;
--- DROP TABLE public.cl_mean_temperatures;
--- DROP TABLE public.cl_minimum_temperatures;
--- DROP TABLE public.cl_fire_projection_summary;
-
--- =======================================================================
--- =======================================================================
--- Create tables
-
--- -----------------------------------------------------------------------
--- Humidity 9 hours table
-
 CREATE TABLE public.cl_humidity_09hours
 (
     station_id integer not null,

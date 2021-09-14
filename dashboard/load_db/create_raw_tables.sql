@@ -199,11 +199,11 @@ CREATE TABLE public.nrm_fire_projection_summary_raw
     "Experiment" character varying(30) COLLATE pg_catalog."default",
     "Year" integer,
     "Avg Ann CFFDI" numeric,
-    "DPY(12-25) High" numeric,
-    "DPY(25-50) Very High" numeric,
-    "DPY(50-75) Severe" numeric,
-    "DPY(75-100) Extreme" numeric,
-    "DPY(over100) Catastrophic" numeric
+    "High" numeric,
+    "Very High" numeric,
+    "Severe" numeric,
+    "Extreme" numeric,
+    "Catastrophic" numeric
 );
 
 -- -----------------------------------------------------------------------
