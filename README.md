@@ -5,7 +5,7 @@ Evidence of global heating has been accumulating over the past three decades and
 
 The project consists of three components:  
 * The sql database to house the climate data and to provide data to the web page  
-* The API to provide a URL for web page querries  
+* The API to provide a URL for web page queries  
 * The web page to provde the means to explore the data 
 
 ## Data  
