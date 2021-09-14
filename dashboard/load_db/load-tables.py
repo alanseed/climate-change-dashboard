@@ -5,7 +5,7 @@ from sqlalchemy_utils import database_exists, create_database
 from config import pg_key 
 
 # local connection
-url = f"postgresql://postgres:{pg_key}@localhost:5432/Test_DB" 
+url = f"postgresql://postgres:{pg_key}@localhost:5432/Climate_DB" 
 engine = create_engine(url) 
 
 if database_exists(engine.url):

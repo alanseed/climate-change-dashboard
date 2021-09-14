@@ -12,12 +12,28 @@ The project consists of three components:
 The data were downloaded from [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/en/obtain-data/download-datasets/) which is a collaboration between the CSIRO and the Australian Government Bureau of Meteorology.  
 
 ## File Structure 
+* ```README.md```  
+* ```Future_Climate_Predictions_for_Australia.pdf``` Project proposal  
+* ```Project2_presentation.pdf``` Project presentation 
+* ```requirements.txt``` Python requirements 
 * ```/dashboard```  
   * ```index.html``` Landing page for the web site 
   * ```/api```  Python scripts for the api 
-  * ```/data```  Input csv files to build the database 
-  * ```/'db scripts'```  Scripts to build the database 
+  * ```/data```  Input csv files to put into the database 
+  * ```/load_db```  Python scripts to build the database 
   * ```/static``` Scripts to run the web site  
 
+## Installation Notes  
+The landing page is ```climate-change-dashboard/dashboard/index.html```  
+
+**Build the database**   
+The application builds a database called Climate_DB in a PostgreSQL data base, assuming that the username is postgres.    
+1. Create a python environment using the ```requirements.txt``` file.   
+2. Edit ```climate-change-dashboard/dashboard/load_db/config.py``` to set your postgres password.   
+3. Run ```climate-change-dashboard/dashboard/load_db/load-tables.py``` to create and load the data.    
+
+**Start the app to serve the data**    
+Edit ```climate-change-dashboard/dashboard/api/api_keys.py``` to set your postgres password.     
+Run ```climate-change-dashboard/dashboard/api/app.py```.      
 
 

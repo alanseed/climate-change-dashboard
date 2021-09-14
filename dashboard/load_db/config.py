@@ -1,1 +1,1 @@
-pg_key = "post-2l2nS33d" 
+pg_key = "YOUR POSTGRES PASSWORD" 
