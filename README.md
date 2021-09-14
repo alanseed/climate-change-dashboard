@@ -28,12 +28,14 @@ The landing page is ```climate-change-dashboard/dashboard/index.html```
 
 **Build the database**   
 The application builds a database called Climate_DB in a PostgreSQL data base, assuming that the username is postgres.    
-1. Create a python environment using the ```requirements.txt``` file.   
-2. Edit ```climate-change-dashboard/dashboard/load_db/config.py``` to set your postgres password.   
-3. Run ```climate-change-dashboard/dashboard/load_db/load-tables.py``` to create and load the data.    
+1. Create a python environment using the ```requirements.txt``` file. 
+2. Change directory to ```climate-change-dashboard/dashboard/load_db```  
+2. Edit ```config.py``` to set your postgres password.   
+3. Run ```load-tables.py``` to create and load the data.    
 
-**Start the app to serve the data**    
-Edit ```climate-change-dashboard/dashboard/api/api_keys.py``` to set your postgres password.     
-Run ```climate-change-dashboard/dashboard/api/app.py```.      
+**Start the app to serve the data**  
+1. Change directory to ```climate-change-dashboard/dashboard/api```    
+2. Edit ```api_keys.py``` to set your postgres password.     
+3. Run ```app.py```.      
 
 
