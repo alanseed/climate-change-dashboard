@@ -1,1 +1,1 @@
-web: gunicorn aus-cp:dashboard/api/app.py
+web: gunicorn wsgi:app
